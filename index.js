@@ -257,10 +257,10 @@ window.onload = () => {
                     } else if (toVal - now < 1000 * 60 * 2) {
                         obj.parentNode.parentNode.classList.add('green');
                         obj.parentNode.parentNode.classList.remove('red');
-                    } else {
-                        obj.parentNode.parentNode.classList.remove('green');
-                        obj.parentNode.parentNode.classList.remove('red');
                     }
+                } else {
+                    obj.parentNode.parentNode.classList.remove('green');
+                    obj.parentNode.parentNode.classList.remove('red');
                 }
             }
 
