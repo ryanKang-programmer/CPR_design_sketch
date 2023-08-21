@@ -24,16 +24,127 @@
                 background-position: top;">
         </div>
         <div style="position: absolute; inset: 0;">
-            <div id="alarm-container">
+            <div style="position: absolute; inset: 0; display: flex;">
+                <div class="element">
+                    <div class="box">
+                        <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
+                            <div class="title-container">
+                                <div class="title-text">
+                                    Instruction
+                                </div>
+                            </div>
+                            <div class="contents-container">
+                                <ul id="instruction">
+                                </ul> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="element">
+                    <div class="box">
+                        <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%; font-size: 3rem;">
+                            <div onclick="refreshEpi()" style="position: absolute; top: 0; height: 3rem; right: 1rem; cursor: pointer;"><i class="fas fa-sync"></i></div>
+                            <div class="title-container">
+                                <div class="title-text">
+                                    Epinephrine
+                                </div>
+                            </div>
+                            <div id="epi-timer-from" class="time" value=""></div>
+                            <div>-</div>
+                            <div id="epi-timer-to" class="time" value=""></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="element">
+                    <div class="box">
+                        <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%; font-size: 3rem;">
+                            <div class="title-container">
+                                <div class="title-text">
+                                    CPR
+                                </div>
+                            </div>
+                            <div id="cpr-timer" class="time" value=""></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="element">
+                    <div class="box">
+                        <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
+                            <div class="title-container">
+                                <div class="title-text" id="q-title">
+                                    Question
+                                </div>
+                            </div>
+                            <div style="position: absolute; inset: 2rem; display: flex; justify-content: flex-start; align-items: stretch;">
+                                <div style="flex: 1; padding-right: 1rem; padding-top: 1rem;">
+                                    <div id="yes-btn" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); height: 100%; display: flex; align-items: center;
+                                    position:relative; cursor: pointer;">
+                                        <div style="position: absolute; top: .5rem; font-size: 1.5rem; left: 0; right: 0; text-align: center;">Yes</div>
+                                        <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                                            <ul id="yes-summary" style="list-style-position: inside;">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="flex: 1; padding-left: 1rem; padding-top: 1rem;">
+                                    <div id="no-btn" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); height: 100%; display: flex; align-items: center; justify-content: center;
+                                    position:relative; cursor: pointer;">
+                                        <div style="position: absolute; top: .5rem; font-size: 1.5rem; left: 0; right: 0; text-align: center;">No</div>
+                                        <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                                            <ul id="no-summary" style="list-style-position: inside;">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div style="position: absolute; bottom: 1rem; right: 1rem">
                 <span style="font-size: .5rem; opacity: 0.5; color: gray;">
                     [https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL2ZsNTIwOTg4MDk2NDUtaW1hZ2UuanBn.jpg]
                 </span>
             </div>
-            <div style="position: absolute; right: 0; bottom: 0; padding: 2rem; cursor: pointer;" onclick="addAlarm()">
+            <!-- <div style="position: absolute; right: 0; bottom: 0; padding: 2rem; cursor: pointer;" onclick="addAlarm()">
                 <i style="background-color: rgba(255, 255, 255); border-radius: 50%;" class="fas fa-plus-circle fa-5x"></i>
+            </div> -->
+            <div id="modal" style="background-color: rgba(0, 0, 0, 0.5); position: absolute; inset: 0; display: none;">
+                <div style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                    <div style="width: 50vw; height: 50vh; background-color: white; border-radius: 10px; display: flex; flex-direction: column;">
+                        <div style="display: flex; justify-content: center; align-items: center; border-bottom: .5px solid lightgray; padding: 1rem 0;">
+                            <span style="font-weight: 800; font-size: 2rem;">Check Return of spontaneous circulation (ROSC)</span>
+                        </div>
+                        <div style="display: flex; flex-direction: row; flex: 1; padding: 0 1rem">
+                            <div onclick="ROSC_YES()"style="cursor: pointer; display:flex; flex: 1; align-items: center; margin: 1rem; background-color: rgba(0, 176, 80, 0.5); border-radius: 1rem; flex-direction: column;">
+                                <div>
+                                    <span style="font-size: 2rem;">Yes</span>
+                                </div>
+                                <div style="flex: 1; align-items: center;">
+                                    <ul style="height: 100%; display: flex; align-items: center;">
+                                        <li>
+                                            <span style="font-size: 1.5rem;">Post-Cardiac Arrest Care checklist</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div onclick="ROSC_NO()" style="cursor: pointer; display:flex; flex: 1; align-items: center; margin: 1rem; background-color: rgba(127, 127, 127, 0.5); border-radius: 1rem; flex-direction: column;">
+                                <div>
+                                    <span style="font-size: 2rem;">No</span>
+                                </div>
+                                <div style="flex: 1; align-items: center;">
+                                    <ul style="height: 100%; display: flex; align-items: center;">
+                                        <li>
+                                            <span style="font-size: 1.5rem;">CPR 2 min</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <div id="snackbar"></div>
     </body>
 </html>
