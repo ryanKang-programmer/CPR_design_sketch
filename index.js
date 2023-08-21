@@ -232,19 +232,37 @@ window.onload = () => {
             } else {
                 obj.style.display = "";
             }
-            if (time - now < 1000 * 10){
-                //red
-                obj.parentNode.parentNode.classList.remove('green');
-                obj.parentNode.parentNode.classList.add('red');
-            } else if (time - now < 1000 * 60) {
-                //green
-                obj.parentNode.parentNode.classList.add('green');
-                obj.parentNode.parentNode.classList.remove('red');
-            } else {
-                //normal
-                obj.parentNode.parentNode.classList.remove('green');
-                obj.parentNode.parentNode.classList.remove('red');
-            } 
+            //for CPR
+            if (obj.id === "cpr-timer") {
+                if (time - now < 1000 * 10){
+                    //red
+                    obj.parentNode.parentNode.classList.remove('green');
+                    obj.parentNode.parentNode.classList.add('red');
+                } else if (time - now < 1000 * 60) {
+                    //green
+                    obj.parentNode.parentNode.classList.add('green');
+                    obj.parentNode.parentNode.classList.remove('red');
+                } else {
+                    //normal
+                    obj.parentNode.parentNode.classList.remove('green');
+                    obj.parentNode.parentNode.classList.remove('red');
+                } 
+            //for Epinephrine
+            } else if (obj.id === "epi-timer-from") {
+                if (time - now <= 0){
+                    const toVal = document.getElementById("epi-timer-to").getAttribute("value");
+                    if (toVal - now < 1000 * 10) {
+                        obj.parentNode.parentNode.classList.remove('green');
+                        obj.parentNode.parentNode.classList.add('red');
+                    } else if (toVal - now < 1000 * 60 * 2) {
+                        obj.parentNode.parentNode.classList.add('green');
+                        obj.parentNode.parentNode.classList.remove('red');
+                    } else {
+                        obj.parentNode.parentNode.classList.remove('green');
+                        obj.parentNode.parentNode.classList.remove('red');
+                    }
+                }
+            }
 
             obj.innerHTML = toHoursAndMinutes((time - now) / 1000);
         }
