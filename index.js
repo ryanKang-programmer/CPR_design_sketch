@@ -355,14 +355,14 @@ function updateUI(idx, msg) {
     // target.question
     target.question?.title ? qt_e.innerHTML = target.question?.title : null;
     // target.question.y
-    y_b.onclick = () => updateUI(target.question?.y?.goto, "Yes clicked");
+    y_b.onclick = () => updateUI(target.question?.y?.goto, `Yes clicked, Move to ${target.question?.y?.goto}`);
     const y_html = target.question?.y?.contents?.reduce((prev, curr) =>
         prev + `<li>${curr}</li>`
     , '')
     ys_e.innerHTML = y_html;
 
     // target.question.n
-    n_b.onclick = () => updateUI(target.question?.n?.goto, "No clicked");
+    n_b.onclick = () => updateUI(target.question?.n?.goto, `No clicked, Move to ${target.question?.n?.goto}`);
     const n_html = target.question?.n?.contents?.reduce((prev, curr) =>
         prev + `<li>${curr}</li>`
     , '')
