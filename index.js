@@ -574,11 +574,14 @@ function ROSC_YES() {
     x.className = "show";
 
     // After 3 seconds, remove the show class from DIV
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    setTimeout(function(){
+        x.className = x.className.replace("show", "");
+        alert("Post-Cardiac Arrest Care checklist");
+    }, 3000);
 }
 
 function ROSC_NO() {
-    updateUI(10, "No clicked");
+    updateUI(10, "No clicked, Move to 10");
     document.getElementById("modal").style.display = 'none';
     //TODO;
 }
