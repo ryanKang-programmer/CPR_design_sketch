@@ -164,7 +164,7 @@ html, body {
 .hex4 {
     background: rgba(255, 0, 0, 0.5);;
     -webkit-clip-path: polygon(15% 5%, 85% 5%, 95% 50%, 85% 95%, 15% 95%, 5% 50%);
-    clip-path: polygon(15% 5%, 85% 5%, 95% 50%, 85% 95%, 15% 95%, 5% 50%);
+    clip-path: polygon(15% 10%, 85% 10%, 95% 50%, 85% 90%, 15% 90%, 5% 50%);
 }
 
 .simple-gray-box {
@@ -183,4 +183,12 @@ html, body {
 
 .small {
     height: 5vh;
+}
+
+#algorithm-modal * {
+    font-size: 1rem;
+}
+
+#algorithm-modal .contents-container {
+    top: 2.5rem;
 }
