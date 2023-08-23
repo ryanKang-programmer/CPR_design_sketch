@@ -87,7 +87,7 @@ const alarms = [
         id: 7,
         instruction: [
             "Shock",
-            "CPR [2:00]",
+            "CPR 2 min",
             "Amiodarone or lidocaine",
             "Treat reversible causes",
         ],
@@ -136,7 +136,7 @@ const alarms = [
         instruction: [
             "Asytole/PEA",
             "Epinephrine ASAP",
-            "CPR [2:00]",
+            "CPR 2 min",
             "IV/IO access",
             "Epinephrine every 3-5 min",
             "Consider advanced airway and capnography",
@@ -163,7 +163,7 @@ const alarms = [
     {
         id: 10,
         instruction: [
-            "CPR [2:00]",
+            "CPR 2 min",
             "IV/IO access",
             "Epinephrine every 3-5 min",
             "Consider advanced airway and capnography",
@@ -190,7 +190,7 @@ const alarms = [
     {
         id: 11,
         instruction: [
-            "CPR [2:00]",
+            "CPR 2 min",
             "Treat reversible causes",
         ],
         epinephrine: true,
@@ -233,7 +233,7 @@ window.onload = () => {
                 obj.style.display = "";
             }
             //for CPR
-            if (obj.id === "cpr-timer") {
+            if (obj.id === "cpr-timer" || obj.id === "cpr-timer-type3") {
                 if (time - now < 1000 * 10){
                     //red
                     obj.parentNode.parentNode.classList.remove('green');
@@ -262,15 +262,46 @@ window.onload = () => {
                     obj.parentNode.parentNode.classList.remove('green');
                     obj.parentNode.parentNode.classList.remove('red');
                 }
+            } else if (obj.id === "epi-timer-from-type3") {
+                if (time - now <= 0){
+                    const toVal = document.getElementById("epi-timer-to-type3").getAttribute("value");
+                    if (toVal - now < 1000 * 10) {
+                        obj.parentNode.parentNode.classList.remove('green');
+                        obj.parentNode.parentNode.classList.add('red');
+                    } else if (toVal - now < 1000 * 60 * 2) {
+                        obj.parentNode.parentNode.classList.add('green');
+                        obj.parentNode.parentNode.classList.remove('red');
+                    }
+                } else {
+                    obj.parentNode.parentNode.classList.remove('green');
+                    obj.parentNode.parentNode.classList.remove('red');
+                }
             }
 
             obj.innerHTML = toHoursAndMinutes((time - now) / 1000);
         }
     }, 1000);
     //Timer end
+
+    type(3, document.querySelectorAll('.type-btn')[1]);
+}
+
+function type(idx, t) {
+    document.querySelectorAll(".type-container").forEach(
+        o => o.style.display = "none"
+    )
+    document.querySelector(`#type-${idx}`).style.display = ""
+
+    document.querySelectorAll(".type-btn").forEach(
+        o => o.classList.remove("selected")
+    )
+
+    t.classList.add("selected");
 }
 
 function updateUI(idx, msg) {
+    const chunkContainer = document.getElementById("chunck-container");
+    chunkContainer.innerHTML = "";
     const x = document.getElementById("snackbar");
     const lastTime = new Date();
     if (msg !== undefined) {
@@ -310,10 +341,16 @@ function updateUI(idx, msg) {
             document.getElementById("epi-timer-from").setAttribute("value", lastTime.getTime() + 1000 * 60 * 3);
             document.getElementById("epi-timer-to").setAttribute("value", lastTime.getTime() + 1000 * 60 * 5);
         }
+
+        if (document.getElementById("epi-timer-from-type3").getAttribute("value") === "" && document.getElementById("epi-timer-to-type3").getAttribute("value") === "") {
+            document.getElementById("epi-timer-from-type3").setAttribute("value", lastTime.getTime() + 1000 * 60 * 3);
+            document.getElementById("epi-timer-to-type3").setAttribute("value", lastTime.getTime() + 1000 * 60 * 5);
+        }
     }
 
     if (target.cpr === true) {
         document.getElementById("cpr-timer").setAttribute("value", lastTime.getTime() + 1000 * 60 * 3);
+        document.getElementById("cpr-timer-type3").setAttribute("value", lastTime.getTime() + 1000 * 60 * 3);
     }
     // target.question
     target.question?.title ? qt_e.innerHTML = target.question?.title : null;
@@ -330,6 +367,137 @@ function updateUI(idx, msg) {
         prev + `<li>${curr}</li>`
     , '')
     ns_e.innerHTML = n_html;
+
+    switch (idx) {
+        case 1:
+            chunkContainer.innerHTML = `
+            ${gray_li("Start CPR",target.instruction)}
+            ${question_box(target.question?.title, target.question?.y?.goto, target.question?.n?.goto)}`
+            break;
+        case 2:
+            chunkContainer.innerHTML = `
+            ${simple_gray_html(target.instruction[0])}
+            ${shock_html()}
+            ${gray_li(target.instruction[2],[target.instruction[3]])}
+            ${question_box(target.question?.title, target.question?.y?.goto, target.question?.n?.goto)}`
+            break;
+        case 5:
+            chunkContainer.innerHTML = `
+            ${shock_html()}
+            ${gray_li(target.instruction[1], [target.instruction[2], target.instruction[3]])}
+            ${question_box(target.question?.title, target.question?.y?.goto, target.question?.n?.goto)}`
+            break;
+        case 7:
+            chunkContainer.innerHTML = `
+            ${shock_html()}
+            ${gray_li(target.instruction[1], [target.instruction[2], target.instruction[3]])}
+            ${question_box(target.question?.title, target.question?.y?.goto, target.question?.n?.goto)}`
+            break;
+        case 9:
+            chunkContainer.innerHTML = `
+            ${simple_gray_html(target.instruction[0])}
+            ${epi_html()}
+            ${gray_li(target.instruction[2], [target.instruction[3], target.instruction[4], target.instruction[5]])}
+            ${question_box(target.question?.title, target.question?.y?.goto, target.question?.n?.goto)}
+            `
+            break;
+        case 10:
+            chunkContainer.innerHTML = `
+            ${gray_li(target.instruction[0], [target.instruction[1], target.instruction[2], target.instruction[3]])}
+            ${question_box(target.question?.title, target.question?.y?.goto, target.question?.n?.goto)}
+            `
+            break;
+        case 11:
+            chunkContainer.innerHTML = `
+                ${gray_li(target.instruction[0], [target.instruction[1]])}
+                ${question_box(target.question?.title, target.question?.y?.goto, target.question?.n?.goto)}
+            `
+            break;
+    }
+}
+
+function gray_li(title, instructions) {
+    return `<div style="flex: 0; padding: 2rem">
+        <div class="box">
+            <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
+                <div class="title-container">
+                    <div class="title-text">
+                        ${title === undefined ? "Title" : title}
+                    </div>
+                </div>
+                <div class="contents-container">
+                    <ul id="instruction">
+                        ${instructions === undefined ? "" : instructions?.reduce((prev, curr) => 
+                        prev + `<li> ${curr} </li>`, '')}
+                    </ul> 
+                </div>
+            </div>
+        </div>
+    </div>`
+}
+
+function question_box(q, y, n) {
+    return `<div class="hex3" style="flex: 0; padding: 2rem;">
+        <div style="height: 20vh;">
+            <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
+                <div style="position: absolute;top: -1rem; height: 3rem; display: flex; align-items: center; justify-content: center;">
+                    <div style="font-size: 1.5rem; font-weight: bold;">
+                        ${q === undefined ? "question" : q}
+                    </div>
+                </div>
+                <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
+                    <div onclick="updateUI(${y}, 'Yes clicked, Move to ${y}');" id="yes-btn" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); height: 50%; display: flex; align-items: center; justify-content: center;
+                    position:relative; cursor: pointer; flex: .4">
+                        <div style="font-size: 1.5rem; font-weight: bold;">Yes</div>
+                        <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                            <ul id="yes-summary" style="list-style-position: inside;">
+                            </ul>
+                        </div>
+                    </div>
+                    <div onclick="updateUI(${n}, 'No clicked, Move to ${n}');" id="no-btn" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); height: 50%; display: flex; align-items: center; justify-content: center;
+                    position:relative; cursor: pointer; flex: .4">
+                        <div style="font-size: 1.5rem; font-weight: bold;">No</div>
+                        <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                            <ul id="no-summary" style="list-style-position: inside;">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>`
+}
+
+function shock_html() {
+    return `
+    <div style="padding: 2rem;">
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <i class="fas fa-bolt" style="color: #ff0000; font-size: 10vh;"></i>
+            <span style="color: #ff0000; font-weight: bold; font-size: 1.5rem;">Shock</span>
+        </div>
+    </div>
+    `
+}
+
+function epi_html() {
+    return `
+    <div style="padding: 2rem;">
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <i class="fas fa-syringe" style="color: #ff0000; font-size: 10vh;"></i>
+            <span style="color: #ff0000; font-weight: bold; font-size: 1.5rem;">Epinephrine ASAP</span>
+        </div>
+    </div>
+    `
+}
+
+function simple_gray_html(t) {
+    return `
+    <div style="padding: 2rem">
+        <div class="simple-gray-box">
+            ${t}
+        </div>
+    </div>
+    `
 }
 
 function toHoursAndMinutes(totalSeconds) {
@@ -421,6 +589,11 @@ function refreshEpi() {
     if (document.getElementById("epi-timer-from").getAttribute("value") !== "" && document.getElementById("epi-timer-to").getAttribute("value") !== "") {
         document.getElementById("epi-timer-from").setAttribute("value", lastTime.getTime() + 1000 * 60 * 3);
         document.getElementById("epi-timer-to").setAttribute("value", lastTime.getTime() + 1000 * 60 * 5);
+    }
+
+    if (document.getElementById("epi-timer-from-type3").getAttribute("value") !== "" && document.getElementById("epi-timer-to-type3").getAttribute("value") !== "") {
+        document.getElementById("epi-timer-from-type3").setAttribute("value", lastTime.getTime() + 1000 * 60 * 3);
+        document.getElementById("epi-timer-to-type3").setAttribute("value", lastTime.getTime() + 1000 * 60 * 5);
     }
 }
 

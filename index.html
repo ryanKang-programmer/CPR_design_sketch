@@ -23,7 +23,7 @@
                 background-repeat: no-repeat;
                 background-position: top;">
         </div>
-        <div style="position: absolute; inset: 0;">
+        <div class="type-container" style="position: absolute; inset: 0;" id="type-2">
             <div style="position: absolute; inset: 0; display: flex;">
                 <div class="element">
                     <div class="box">
@@ -109,36 +109,75 @@
             <!-- <div style="position: absolute; right: 0; bottom: 0; padding: 2rem; cursor: pointer;" onclick="addAlarm()">
                 <i style="background-color: rgba(255, 255, 255); border-radius: 50%;" class="fas fa-plus-circle fa-5x"></i>
             </div> -->
-            <div id="modal" style="background-color: rgba(0, 0, 0, 0.5); position: absolute; inset: 0; display: none;">
-                <div style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
-                    <div style="width: 50vw; height: 50vh; background-color: white; border-radius: 10px; display: flex; flex-direction: column;">
-                        <div style="display: flex; justify-content: center; align-items: center; border-bottom: .5px solid lightgray; padding: 1rem 0;">
-                            <span style="font-weight: 800; font-size: 2rem;">Check Return of spontaneous circulation (ROSC)</span>
-                        </div>
-                        <div style="display: flex; flex-direction: row; flex: 1; padding: 0 1rem">
-                            <div onclick="ROSC_YES()"style="cursor: pointer; display:flex; flex: 1; align-items: center; margin: 1rem; background-color: rgba(0, 176, 80, 0.5); border-radius: 1rem; flex-direction: column;">
-                                <div>
-                                    <span style="font-size: 2rem;">Yes</span>
+        </div>
+        <div class="type-container" style="position: absolute; left: 0; right:0; top: 0; bottom: 0" id="type-3">
+            <div style="position: relative; width: 100%; height: 100%; display: flex; justify-content: space-between;">
+                <div style="flex: 0.3; display: flex; flex-direction: column; align-items: stretch;" id="chunck-container">
+                </div>
+                <div style="flex: 0.2;">
+                    <div class="element">
+                        <div class="box">
+                            <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%; font-size: 3rem;">
+                                <div class="title-container">
+                                    <div class="title-text">
+                                        CPR
+                                    </div>
                                 </div>
-                                <div style="flex: 1; align-items: center;">
-                                    <ul style="height: 100%; display: flex; align-items: center;">
-                                        <li>
-                                            <span style="font-size: 1.5rem;">Post-Cardiac Arrest Care checklist</span>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <div id="cpr-timer-type3" class="time" value=""></div>
                             </div>
-                            <div onclick="ROSC_NO()" style="cursor: pointer; display:flex; flex: 1; align-items: center; margin: 1rem; background-color: rgba(127, 127, 127, 0.5); border-radius: 1rem; flex-direction: column;">
-                                <div>
-                                    <span style="font-size: 2rem;">No</span>
+                        </div>
+                    </div>
+                    <div class="element">
+                        <div class="box">
+                            <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%; font-size: 3rem;">
+                                <div onclick="refreshEpi()" style="position: absolute; top: 0; height: 3rem; right: 1rem; cursor: pointer;"><i class="fas fa-sync"></i></div>
+                                <div class="title-container">
+                                    <div class="title-text">
+                                        Epinephrine
+                                    </div>
                                 </div>
-                                <div style="flex: 1; align-items: center;">
-                                    <ul style="height: 100%; display: flex; align-items: center;">
-                                        <li>
-                                            <span style="font-size: 1.5rem;">CPR 2 min</span>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <div id="epi-timer-from-type3" class="time" value=""></div>
+                                <div>-</div>
+                                <div id="epi-timer-to-type3" class="time" value=""></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="position: absolute; right: 0; bottom: 0; display: flex; padding: 1rem;">
+            <div onclick="type(2, this)" class="type-btn" style="margin-right: 1rem;">Type 2</div>
+            <div onclick="type(3, this)" class="type-btn">Type 3</div>
+        </div>
+        <div id="modal" style="background-color: rgba(0, 0, 0, 0.5); position: absolute; inset: 0; display: none;">
+            <div style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                <div style="width: 50vw; height: 50vh; background-color: white; border-radius: 10px; display: flex; flex-direction: column;">
+                    <div style="display: flex; justify-content: center; align-items: center; border-bottom: .5px solid lightgray; padding: 1rem 0;">
+                        <span style="font-weight: 800; font-size: 2rem;">Check Return of spontaneous circulation (ROSC)</span>
+                    </div>
+                    <div style="display: flex; flex-direction: row; flex: 1; padding: 0 1rem">
+                        <div onclick="ROSC_YES()"style="cursor: pointer; display:flex; flex: 1; align-items: center; margin: 1rem; background-color: rgba(0, 176, 80, 0.5); border-radius: 1rem; flex-direction: column;">
+                            <div>
+                                <span style="font-size: 2rem;">Yes</span>
+                            </div>
+                            <div style="flex: 1; align-items: center;">
+                                <ul style="height: 100%; display: flex; align-items: center;">
+                                    <li>
+                                        <span style="font-size: 1.5rem;">Post-Cardiac Arrest Care checklist</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div onclick="ROSC_NO()" style="cursor: pointer; display:flex; flex: 1; align-items: center; margin: 1rem; background-color: rgba(127, 127, 127, 0.5); border-radius: 1rem; flex-direction: column;">
+                            <div>
+                                <span style="font-size: 2rem;">No</span>
+                            </div>
+                            <div style="flex: 1; align-items: center;">
+                                <ul style="height: 100%; display: flex; align-items: center;">
+                                    <li>
+                                        <span style="font-size: 1.5rem;">CPR 2 min</span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
