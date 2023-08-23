@@ -283,7 +283,7 @@ window.onload = () => {
     }, 1000);
     //Timer end
 
-    type(3, document.querySelectorAll('.type-btn')[1]);
+    type(2, document.querySelectorAll('.type-btn')[0]);
 }
 
 function type(idx, t) {
