@@ -216,6 +216,8 @@ const alarms = [
 
 let index = 7;
 
+const history = [0];
+
 window.onload = () => {
     updateUI(1);
     //Timer function
@@ -299,7 +301,15 @@ function type(idx, t) {
     t.classList.add("selected");
 }
 
-function updateUI(idx, msg) {
+function updateUI(idx, msg, isBack = false) {
+    if (!isBack) {
+        history.push(idx);
+    }
+
+    if (idx === 0) {
+        location.reload();
+    }
+
     const chunkContainer = document.getElementById("chunck-container");
     chunkContainer.innerHTML = "";
     const x = document.getElementById("snackbar");
@@ -319,7 +329,7 @@ function updateUI(idx, msg) {
     }
     //idx !== goto
     const target = alarms.find(e => e.id === idx);
-    console.log(target);
+    
     const i_e = document.getElementById('instruction');
     const et_e = document.getElementById('epi-timer');
     const ct_e = document.getElementById('cpr-timer');
@@ -678,5 +688,31 @@ function closeAlarm(idx) {
         if (container.childNodes[i].getAttribute('index') == idx) {
             container.childNodes[i].remove();
         }
+    }
+}
+
+function goBack() {
+    history.pop();
+    const prevID = history[history.length - 1];
+    console.log(prevID);
+
+    updateUI(prevID, undefined, true);
+    const x = document.getElementById("snackbar");
+
+    x.innerText = `Back to ${prevID}`;
+    // Add the "show" class to DIV
+    x.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function(){
+        x.className = x.className.replace("show", "");
+    }, 3000);
+}
+
+function overview(bool) {
+    if (bool) {
+        document.getElementById('algorithm-modal').style.display = "block";
+    } else {
+        document.getElementById('algorithm-modal').style.display = "none";
     }
 }

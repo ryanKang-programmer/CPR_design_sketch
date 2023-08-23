@@ -161,6 +161,12 @@ html, body {
     clip-path: polygon(15% 5%, 85% 5%, 95% 50%, 85% 95%, 15% 95%, 5% 50%);
 }
 
+.hex4 {
+    background: rgba(255, 0, 0, 0.5);;
+    -webkit-clip-path: polygon(15% 5%, 85% 5%, 95% 50%, 85% 95%, 15% 95%, 5% 50%);
+    clip-path: polygon(15% 5%, 85% 5%, 95% 50%, 85% 95%, 15% 95%, 5% 50%);
+}
+
 .simple-gray-box {
     height: 10vh;
     width: 100%;
@@ -173,4 +179,8 @@ html, body {
     align-items: center;
     font-size: 1.5rem;
     font-weight: bold;
+}
+
+.small {
+    height: 5vh;
 }

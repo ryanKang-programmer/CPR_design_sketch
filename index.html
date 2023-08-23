@@ -146,8 +146,17 @@
             </div>
         </div>
         <div style="position: absolute; right: 0; bottom: 0; display: flex; padding: 1rem;">
+            <div onclick="overview(true)" style="border-radius: .5rem; background-color: rgb(250, 250, 250); padding: 1rem; cursor: pointer; margin-right: 1rem;">
+                Overview
+                <i class="far fa-eye"></i>
+            </div>
             <div onclick="type(2, this)" class="type-btn" style="margin-right: 1rem;">Type 2</div>
             <div onclick="type(3, this)" class="type-btn">Type 3</div>
+        </div>
+        <div style="position: absolute; left: 0; top: 0; padding: 1rem;">
+            <div onclick="goBack()" style="cursor: pointer; border-radius: 1.5rem; width: 3rem; height: 3rem; background-color: gray; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-undo-alt" style="font-size: 2rem;"></i>
+            </div>
         </div>
         <div id="modal" style="background-color: rgba(0, 0, 0, 0.5); position: absolute; inset: 0; display: none;">
             <div style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
@@ -178,6 +187,126 @@
                                         <span style="font-size: 1.5rem;">CPR 2 min</span>
                                     </li>
                                 </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="algorithm-modal" style="background-color: rgba(0, 0, 0, 0.5); position: absolute; inset: 0; display: block;">
+            <div style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                <div style="width: 50vw; height: 90vh; background-color: white; border-radius: 10px; display: flex; flex-direction: column;">
+                    <div style="display: flex; justify-content: center; align-items: center; border-bottom: .5px solid lightgray; padding: 1rem 0; position: relative;">
+                        <span style="font-weight: 800; font-size: 2rem;">Pediatric Cardiac Arrest Algorithm</span>
+                        <i class="fas fa-times" style="position: absolute; right: 1rem; font-size: 5vh; cursor: pointer;" onclick="overview(false)"></i>
+                    </div>
+                    <div style="display: flex; flex-direction: column; flex: 1; padding: 0 1rem; align-items: center;">
+                        <div style="flex: 0; padding: 2rem;" id="Algorithm-1">
+                            <div class="box" style="width: 20vw; height: 10vh;">
+                                <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
+                                    <div class="title-container">
+                                        <div class="title-text">
+                                            <div>Start CPR</div>
+                                        </div>
+                                    </div>
+                                    <div class="contents-container">
+                                        <ul id="instruction">
+                                            <li>Begin bag-mask ventilation and given oxygen</li>
+                                            <li>Attach monitor/defibrillator</li>
+                                        </ul> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hex3" style="flex: 0; padding: 2rem;">
+                            <div style="height: 7vh; width: 20vw;">
+                                <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
+                                    <div style="position: absolute;top: -1.7rem; height: 3rem; display: flex; align-items: center; justify-content: center;">
+                                        <div style="font-size: 1.5rem; font-weight: bold;">
+                                            Rythm shockable?
+                                        </div>
+                                    </div>
+                                    <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
+                                        <div onclick="updateUI(${y}, 'Yes clicked, Move to ${y}');" id="yes-btn" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
+                                        position:relative; cursor: pointer; flex: .4">
+                                            <div style="font-size: 1.5rem; font-weight: bold;">Yes</div>
+                                            <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                                                <ul id="yes-summary" style="list-style-position: inside;">
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div onclick="updateUI(${n}, 'No clicked, Move to ${n}');" id="no-btn" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
+                                        position:relative; cursor: pointer; flex: .4">
+                                            <div style="font-size: 1.5rem; font-weight: bold;">No</div>
+                                            <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                                                <ul id="no-summary" style="list-style-position: inside;">
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: row; width: 100%; flex: 1; justify-content: space-around;">
+                            <div style="flex: 0.4">
+                                <div style="padding: 1rem">
+                                    <div class="simple-gray-box small">
+                                        VF/pVT
+                                    </div>
+                                </div>
+                                <div style="padding: 1rem;">
+                                    <div style="display: flex; justify-content: center; align-items: center;">
+                                        <i class="fas fa-bolt" style="color: #ff0000; font-size: 5vh;"></i>
+                                        <span style="color: #ff0000; font-weight: bold; font-size: 1rem;">Shock</span>
+                                    </div>
+                                </div>
+                                <div style="flex: 0; padding: 2rem;" id="Algorithm-1">
+                                    <div class="box" style="width: 20vw; height: 10vh;">
+                                        <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
+                                            <div class="title-container">
+                                                <div class="title-text">
+                                                    <div>CPR 2 min</div>
+                                                </div>
+                                            </div>
+                                            <div class="contents-container">
+                                                <ul id="instruction">
+                                                    <li>IV/IO access</li>
+                                                </ul> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="flex: 0.4;">
+                                <div style="padding: 1rem;">
+                                    <div class="simple-gray-box small">
+                                        Asytole/PEA
+                                    </div>
+                                </div>
+                                <div style="padding: 1rem;">
+                                    <div style="display: flex; justify-content: center; align-items: center;">
+                                        <i class="fas fa-syringe" style="color: #ff0000; font-size: 5vh;"></i>
+                                        <span style="color: #ff0000; font-weight: bold; font-size: 1rem;">Epinephrine ASAP</span>
+                                    </div>
+                                </div>
+                                <div style="flex: 0; padding: 2rem;" id="Algorithm-1">
+                                    <div class="box" style="width: 20vw; height: 10vh;">
+                                        <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
+                                            <div class="title-container">
+                                                <div class="title-text">
+                                                    <div>CPR 2 min</div>
+                                                </div>
+                                            </div>
+                                            <div class="contents-container">
+                                                <ul id="instruction">
+                                                    <li>IV/IO access</li>
+                                                    <li>Epinephrine every 3-5 min</li>
+                                                    <li>Consider advanced airway and capnography</li>
+                                                </ul> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
