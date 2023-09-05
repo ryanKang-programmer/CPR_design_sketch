@@ -23,6 +23,101 @@
                 background-repeat: no-repeat;
                 background-position: top;">
         </div>
+        <div class="type-container" style="position: absolute; inset: 0;" id="type-1">
+            <div style="position: absolute; inset: 0; display: flex;">
+                <div class="element">
+                    <div class="box">
+                        <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%; font-size: 3rem;">
+                            <div onclick="refreshEpi()" style="position: absolute; top: 0; height: 3rem; right: 1rem; cursor: pointer;"><i class="fas fa-sync"></i></div>
+                            <div class="title-container">
+                                <div class="title-text">
+                                    Epinephrine
+                                </div>
+                            </div>
+                            <div id="epi-timer-from" class="time" value=""></div>
+                            <div>-</div>
+                            <div id="epi-timer-to" class="time" value=""></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="element">
+                    <div class="box">
+                        <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
+                            <div class="title-container">
+                                <div class="title-text">
+                                    Previous step
+                                </div>
+                            </div>
+                            <div class="contents-container">
+                                <ul id="prev-instruction">
+                                </ul> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="element">
+                    <div class="box">
+                        <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
+                            <div class="title-container">
+                                <div class="title-text">
+                                    Current step
+                                </div>
+                            </div>
+                            <div class="contents-container">
+                                <ul>
+                                    <li>
+                                        CPR Timer [<div id="cpr-timer-type1" style="display: inline-block;" class="time" value=""></div>]
+                                    </li>    
+                                </ul>
+                                <ul id="cur-instruction">
+                                </ul> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="element">
+                    <div class="box">
+                        <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
+                            <div class="title-container">
+                                <div class="title-text" id="t1-q-title">
+                                    Question
+                                </div>
+                            </div>
+                            <div style="position: absolute; inset: 2rem; display: flex; justify-content: flex-start; align-items: stretch;">
+                                <div style="flex: 1; padding-right: 1rem; padding-top: 1rem;">
+                                    <div id="t1-yes-btn" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); height: 100%; display: flex; align-items: center;
+                                    position:relative; cursor: pointer;">
+                                        <div style="position: absolute; top: .5rem; font-size: 1.5rem; left: 0; right: 0; text-align: center;">Yes</div>
+                                        <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                                            <ul id="t1-yes-summary" style="list-style-position: inside;">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="flex: 1; padding-left: 1rem; padding-top: 1rem;">
+                                    <div id="t1-no-btn" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); height: 100%; display: flex; align-items: center; justify-content: center;
+                                    position:relative; cursor: pointer;">
+                                        <div style="position: absolute; top: .5rem; font-size: 1.5rem; left: 0; right: 0; text-align: center;">No</div>
+                                        <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                                            <ul id="t1-no-summary" style="list-style-position: inside;">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="position: absolute; bottom: 1rem; right: 1rem">
+                <span style="font-size: .5rem; opacity: 0.5; color: gray;">
+                    [https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL2ZsNTIwOTg4MDk2NDUtaW1hZ2UuanBn.jpg]
+                </span>
+            </div>
+            <!-- <div style="position: absolute; right: 0; bottom: 0; padding: 2rem; cursor: pointer;" onclick="addAlarm()">
+                <i style="background-color: rgba(255, 255, 255); border-radius: 50%;" class="fas fa-plus-circle fa-5x"></i>
+            </div> -->
+        </div>
         <div class="type-container" style="position: absolute; inset: 0;" id="type-2">
             <div style="position: absolute; inset: 0; display: flex;">
                 <div class="element">
@@ -150,6 +245,7 @@
                 Overview
                 <i class="far fa-eye"></i>
             </div>
+            <div onclick="type(1, this)" class="type-btn" style="margin-right: 1rem;">Type 1</div>
             <div onclick="type(2, this)" class="type-btn" style="margin-right: 1rem;">Type 2</div>
             <div onclick="type(3, this)" class="type-btn">Type 3</div>
         </div>
@@ -158,7 +254,7 @@
                 <i class="fas fa-undo-alt" style="font-size: 2rem;"></i>
             </div>
         </div>
-        <div id="modal" style="background-color: rgba(0, 0, 0, 0.5); position: absolute; inset: 0; display: none;">
+        <div id="modal" style="background-color: rgba(0, 0, 0, 0.5); position: absolute; inset: 0; display: none; z-index: 9;">
             <div style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
                 <div style="width: 50vw; height: 50vh; background-color: white; border-radius: 10px; display: flex; flex-direction: column;">
                     <div style="display: flex; justify-content: center; align-items: center; border-bottom: .5px solid lightgray; padding: 1rem 0;">
@@ -193,15 +289,17 @@
                 </div>
             </div>
         </div>
+        <!-- Overview Modal -->
         <div id="algorithm-modal" style="background-color: rgba(0, 0, 0, 0.5); position: absolute; inset: 0; display: none;">
             <div style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
                 <div style="width: 50vw; height: 95vh; background-color: white; border-radius: 10px; display: flex; flex-direction: column; overflow: auto;">
-                    <div style="display: flex; justify-content: center; align-items: center; border-bottom: .5px solid lightgray; padding: 1rem 0; position: relative;">
+                    <div style="display: flex; justify-content: center; align-items: center; border-bottom: .5px solid lightgray; padding: 1rem 0;
+                    position: sticky; top: 0; background-color: white; z-index: 2;">
                         <span style="font-weight: 800; font-size: 2rem;">Pediatric Cardiac Arrest Algorithm</span>
                         <i class="fas fa-times" style="position: absolute; right: 1rem; font-size: 5vh; cursor: pointer;" onclick="overview(false)"></i>
                     </div>
                     <div style="display: flex; flex-direction: column; flex: 1; padding: 0 1rem; align-items: center;">
-                        <div style="flex: 0; padding: 2rem;" id="Algorithm-1">
+                        <div style="flex: 0; padding: 2rem;" id="Algorithm-1" class="a1 algo">
                             <div class="box" style="width: 20vw; height: 10vh;">
                                 <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
                                     <div class="title-container">
@@ -218,7 +316,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="hex4" style="flex: 0; padding: 2rem;">
+                        <div class="hex4 a1 algo" style="flex: 0; padding: 2rem;">
                             <div style="height: 3vh; width: 20vw;">
                                 <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
                                     <div style="position: absolute;top: -1.7rem; height: 3rem; display: flex; align-items: center; justify-content: center;">
@@ -227,7 +325,7 @@
                                         </div>
                                     </div>
                                     <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
-                                        <div onclick="updateUI(${y}, 'Yes clicked, Move to ${y}');" id="yes-btn" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
+                                        <div onclick="updateUI(2, 'Yes clicked, Move to 2');" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
                                         position:relative; cursor: pointer; flex: .4">
                                             <div style="font-size: 1rem; font-weight: bold;">Yes</div>
                                             <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
@@ -235,7 +333,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div onclick="updateUI(${n}, 'No clicked, Move to ${n}');" id="no-btn" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
+                                        <div onclick="updateUI(9, 'No clicked, Move to 9');" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
                                         position:relative; cursor: pointer; flex: .4">
                                             <div style="font-size: 1rem; font-weight: bold;">No</div>
                                             <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
@@ -249,18 +347,18 @@
                         </div>
                         <div style="display: flex; flex-direction: row; width: 100%; flex: 1; justify-content: space-around;">
                             <div style="flex: 0.4">
-                                <div style="padding: 1rem">
+                                <div style="padding: 1rem" class="a2 algo">
                                     <div class="simple-gray-box small">
                                         VF/pVT
                                     </div>
                                 </div>
-                                <div style="padding: 1rem;">
+                                <div style="padding: 1rem;" class="a2 algo">
                                     <div style="display: flex; justify-content: center; align-items: center;">
                                         <i class="fas fa-bolt" style="color: #ff0000; font-size: 5vh;"></i>
                                         <span style="color: #ff0000; font-weight: bold; font-size: 1rem;">Shock</span>
                                     </div>
                                 </div>
-                                <div style="flex: 0; padding: 2rem;" id="Algorithm-1">
+                                <div style="flex: 0; padding: 2rem;" id="Algorithm-1" class="a2 algo">
                                     <div class="box" style="width: 20vw; height: 10vh;">
                                         <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
                                             <div class="title-container">
@@ -276,7 +374,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="hex4" style="flex: 0; padding: 2rem;">
+                                <div class="hex4 a2 algo" style="flex: 0; padding: 2rem;">
                                     <div style="height: 3vh; width: 20vw;">
                                         <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
                                             <div style="position: absolute;top: -1.7rem; height: 3rem; display: flex; align-items: center; justify-content: center;">
@@ -285,7 +383,7 @@
                                                 </div>
                                             </div>
                                             <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
-                                                <div onclick="updateUI(${y}, 'Yes clicked, Move to ${y}');" id="yes-btn" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
+                                                <div onclick="updateUI(5, 'Yes clicked, Move to 5');" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
                                                 position:relative; cursor: pointer; flex: .4">
                                                     <div style="font-size: 1rem; font-weight: bold;">Yes</div>
                                                     <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
@@ -293,7 +391,7 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div onclick="updateUI(${n}, 'No clicked, Move to ${n}');" id="no-btn" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
+                                                <div onclick="updateUI(12, 'No clicked, Move to 12');" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
                                                 position:relative; cursor: pointer; flex: .4">
                                                     <div style="font-size: 1rem; font-weight: bold;">No</div>
                                                     <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
@@ -305,13 +403,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div style="padding: 1rem;">
+                                <div style="padding: 1rem;" class="a5 algo">
                                     <div style="display: flex; justify-content: center; align-items: center;">
                                         <i class="fas fa-bolt" style="color: #ff0000; font-size: 5vh;"></i>
                                         <span style="color: #ff0000; font-weight: bold; font-size: 1rem;">Shock</span>
                                     </div>
                                 </div>
-                                <div style="flex: 0; padding: 2rem;" id="Algorithm-1">
+                                <div style="flex: 0; padding: 2rem;" id="Algorithm-1" class="a5 algo">
                                     <div class="box" style="width: 20vw; height: 10vh;">
                                         <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
                                             <div class="title-container">
@@ -328,7 +426,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="hex4" style="flex: 0; padding: 2rem;">
+                                <div class="hex4 a5 algo" style="flex: 0; padding: 2rem;">
                                     <div style="height: 3vh; width: 20vw;">
                                         <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
                                             <div style="position: absolute;top: -1.7rem; height: 3rem; display: flex; align-items: center; justify-content: center;">
@@ -337,7 +435,7 @@
                                                 </div>
                                             </div>
                                             <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
-                                                <div onclick="updateUI(${y}, 'Yes clicked, Move to ${y}');" id="yes-btn" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
+                                                <div onclick="updateUI(7, 'Yes clicked, Move to 7');" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
                                                 position:relative; cursor: pointer; flex: .4">
                                                     <div style="font-size: 1rem; font-weight: bold;">Yes</div>
                                                     <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
@@ -345,7 +443,7 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div onclick="updateUI(${n}, 'No clicked, Move to ${n}');" id="no-btn" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
+                                                <div onclick="updateUI(12, 'No clicked, Move to 12');" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
                                                 position:relative; cursor: pointer; flex: .4">
                                                     <div style="font-size: 1rem; font-weight: bold;">No</div>
                                                     <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
@@ -357,13 +455,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div style="padding: 1rem;">
+                                <div style="padding: 1rem;" class="a7 algo">
                                     <div style="display: flex; justify-content: center; align-items: center;">
                                         <i class="fas fa-bolt" style="color: #ff0000; font-size: 5vh;"></i>
                                         <span style="color: #ff0000; font-weight: bold; font-size: 1rem;">Shock</span>
                                     </div>
                                 </div>
-                                <div style="flex: 0; padding: 2rem;" id="Algorithm-1">
+                                <div style="flex: 0; padding: 2rem;" id="Algorithm-1" class="a7 algo">
                                     <div class="box" style="width: 20vw; height: 10vh;">
                                         <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
                                             <div class="title-container">
@@ -382,18 +480,18 @@
                                 </div>
                             </div>
                             <div style="flex: 0.4;">
-                                <div style="padding: 1rem;">
+                                <div style="padding: 1rem;" class="a9 algo">
                                     <div class="simple-gray-box small">
                                         Asytole/PEA
                                     </div>
                                 </div>
-                                <div style="padding: 1rem;">
+                                <div style="padding: 1rem;" class="a9 algo">
                                     <div style="display: flex; justify-content: center; align-items: center;">
                                         <i class="fas fa-syringe" style="color: #ff0000; font-size: 5vh;"></i>
                                         <span style="color: #ff0000; font-weight: bold; font-size: 1rem;">Epinephrine ASAP</span>
                                     </div>
                                 </div>
-                                <div style="flex: 0; padding: 2rem;" id="Algorithm-1">
+                                <div style="flex: 0; padding: 2rem;" id="Algorithm-1" class="a9 algo">
                                     <div class="box" style="width: 20vw; height: 10vh;">
                                         <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
                                             <div class="title-container">
@@ -411,7 +509,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="hex4" style="flex: 0; padding: 2rem;">
+                                <div class="hex4 a9 algo" style="flex: 0; padding: 2rem;">
                                     <div style="height: 3vh; width: 20vw;">
                                         <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
                                             <div style="position: absolute;top: -1.7rem; height: 3rem; display: flex; align-items: center; justify-content: center;">
@@ -420,7 +518,7 @@
                                                 </div>
                                             </div>
                                             <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
-                                                <div onclick="updateUI(${y}, 'Yes clicked, Move to ${y}');" id="yes-btn" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
+                                                <div onclick="updateUI(7, 'Yes clicked, Move to 7');" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
                                                 position:relative; cursor: pointer; flex: .4">
                                                     <div style="font-size: 1rem; font-weight: bold;">Yes</div>
                                                     <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
@@ -428,7 +526,7 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div onclick="updateUI(${n}, 'No clicked, Move to ${n}');" id="no-btn" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
+                                                <div onclick="updateUI(11, 'No clicked, Move to 11');" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
                                                 position:relative; cursor: pointer; flex: .4">
                                                     <div style="font-size: 1rem; font-weight: bold;">No</div>
                                                     <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
@@ -440,7 +538,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div style="flex: 0; padding: 2rem;" id="Algorithm-1">
+                                <div style="flex: 0; padding: 2rem;" id="Algorithm-1" class="a11 algo">
                                     <div class="box" style="width: 20vw; height: 10vh;">
                                         <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
                                             <div class="title-container">
@@ -456,7 +554,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="hex4" style="flex: 0; padding: 2rem;">
+                                <div class="hex4 a11 algo" style="flex: 0; padding: 2rem;">
                                     <div style="height: 3vh; width: 20vw;">
                                         <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
                                             <div style="position: absolute;top: -1.7rem; height: 3rem; display: flex; align-items: center; justify-content: center;">
@@ -465,7 +563,7 @@
                                                 </div>
                                             </div>
                                             <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
-                                                <div onclick="updateUI(${y}, 'Yes clicked, Move to ${y}');" id="yes-btn" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
+                                                <div onclick="updateUI(7, 'Yes clicked, Move to 7');" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
                                                 position:relative; cursor: pointer; flex: .4">
                                                     <div style="font-size: 1rem; font-weight: bold;">Yes</div>
                                                     <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
@@ -473,7 +571,7 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div onclick="updateUI(${n}, 'No clicked, Move to ${n}');" id="no-btn" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
+                                                <div onclick="updateUI(12, 'No clicked, Move to 12');" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
                                                 position:relative; cursor: pointer; flex: .4">
                                                     <div style="font-size: 1rem; font-weight: bold;">No</div>
                                                     <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
@@ -490,7 +588,7 @@
                         <div style="display: flex; flex-direction: row; width: 100%; flex: 1; justify-content: space-around;">
                             <div style="padding: 1rem; flex: 0.2;">
                             </div>
-                            <div style="padding: 1rem; flex: 0.5;">
+                            <div style="padding: 1rem; flex: 0.5;" class="a12 algo">
                                 <div class="simple-gray-box small" style="height: 10vh; padding: 1rem;">
                                     <ul style="list-style: inside;">
                                         <li>
@@ -502,7 +600,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div style="padding: 1rem; flex: 0.2;">
+                            <div style="padding: 1rem; flex: 0.2;" class="a7 algo">
                                 <div class="simple-gray-box small">
                                     Go to 7.
                                 </div>

@@ -235,19 +235,23 @@ window.onload = () => {
                 obj.style.display = "";
             }
             //for CPR
-            if (obj.id === "cpr-timer" || obj.id === "cpr-timer-type3") {
+            if (obj.id === "cpr-timer" || obj.id === "cpr-timer-type3" || obj.id === "cpr-timer-type1") {
+                let pNode = obj.parentNode.parentNode;
+                if (obj.id === "cpr-timer-type1") {
+                    pNode = obj.parentNode.parentNode.parentNode.parentNode.parentNode;
+                }
                 if (time - now < 1000 * 10){
                     //red
-                    obj.parentNode.parentNode.classList.remove('green');
-                    obj.parentNode.parentNode.classList.add('red');
+                    pNode.classList.remove('green');
+                    pNode.classList.add('red');
                 } else if (time - now < 1000 * 60) {
                     //green
-                    obj.parentNode.parentNode.classList.add('green');
-                    obj.parentNode.parentNode.classList.remove('red');
+                    pNode.classList.add('green');
+                    pNode.classList.remove('red');
                 } else {
                     //normal
-                    obj.parentNode.parentNode.classList.remove('green');
-                    obj.parentNode.parentNode.classList.remove('red');
+                    pNode.classList.remove('green');
+                    pNode.classList.remove('red');
                 } 
             //for Epinephrine
             } else if (obj.id === "epi-timer-from") {
@@ -285,7 +289,16 @@ window.onload = () => {
     }, 1000);
     //Timer end
 
-    type(2, document.querySelectorAll('.type-btn')[0]);
+    type(1, document.querySelectorAll('.type-btn')[0]);
+
+    document.querySelectorAll('.a1').forEach(o => o.onclick = () => updateUI(1, 'Jump to 1'));
+    document.querySelectorAll('.a2').forEach(o => o.onclick = () => updateUI(2, 'Jump to 2'));
+    document.querySelectorAll('.a5').forEach(o => o.onclick = () => updateUI(5, 'Jump to 5'));
+    document.querySelectorAll('.a7').forEach(o => o.onclick = () => updateUI(7, 'Jump to 7'));
+    document.querySelectorAll('.a9').forEach(o => o.onclick = () => updateUI(9, 'Jump to 9'));
+    document.querySelectorAll('.a11').forEach(o => o.onclick = () => updateUI(11, 'Jump to 11'));
+    document.querySelectorAll('.a12').forEach(o => o.onclick = () => updateUI(12, 'Jump to 12'));
+    // updateUI(${y}, 'Yes clicked, Move to ${y}');"
 }
 
 function type(idx, t) {
@@ -310,6 +323,9 @@ function updateUI(idx, msg, isBack = false) {
         location.reload();
     }
 
+    document.querySelectorAll('.algo').forEach(o => o.classList.remove('selected'));
+    document.querySelectorAll(`.a${idx}`).forEach(o => o.classList.add('selected'));
+
     const chunkContainer = document.getElementById("chunck-container");
     chunkContainer.innerHTML = "";
     const x = document.getElementById("snackbar");
@@ -331,19 +347,39 @@ function updateUI(idx, msg, isBack = false) {
     const target = alarms.find(e => e.id === idx);
     
     const i_e = document.getElementById('instruction');
+    const p_i_e = document.getElementById('prev-instruction');
+    const c_i_e = document.getElementById('cur-instruction');
     const et_e = document.getElementById('epi-timer');
     const ct_e = document.getElementById('cpr-timer');
     const qt_e = document.getElementById('q-title');
+    const t3_qt_e = document.getElementById('t1-q-title');
     const y_b = document.getElementById('yes-btn');
+    const t1_y_b = document.getElementById('t1-yes-btn');
     const ys_e = document.getElementById('yes-summary');
+    const t1_ys_e = document.getElementById('t1-yes-summary');
     const n_b = document.getElementById('no-btn');
+    const t1_n_b = document.getElementById('t1-no-btn');
     const ns_e = document.getElementById('no-summary');
+    const t1_ns_e = document.getElementById('t1-no-summary');
     
     const isntruction_html = target.instruction?.reduce((prev, curr) => {
         return prev + `<li>${curr}</li>`;
     }, '')
 
     i_e.innerHTML = isntruction_html;
+    c_i_e.innerHTML = isntruction_html;
+    if (history[history.length - 2] !== undefined || history[history.length - 2] !== 0) {
+        const prevObj = alarms.find(e => e.id === history[history.length - 2]);
+
+        if (prevObj !== undefined && prevObj !== 0) {
+            console.log(prevObj);
+            p_i_e.innerHTML = prevObj.instruction?.reduce((prev, curr) => {
+                return prev + `<li>${curr}</li>`;
+            }, '')
+        } else {
+            p_i_e.innerHTML = "";
+        }
+    }
 
     if (target.epinephrine === true) {
         //TO-DO
@@ -361,22 +397,29 @@ function updateUI(idx, msg, isBack = false) {
     if (target.cpr === true) {
         document.getElementById("cpr-timer").setAttribute("value", lastTime.getTime() + 1000 * 60 * 3);
         document.getElementById("cpr-timer-type3").setAttribute("value", lastTime.getTime() + 1000 * 60 * 3);
+        document.getElementById("cpr-timer-type1").setAttribute("value", lastTime.getTime() + 1000 * 60 * 3);
     }
     // target.question
     target.question?.title ? qt_e.innerHTML = target.question?.title : null;
+    target.question?.title ? t3_qt_e.innerHTML = target.question?.title : null;
+
     // target.question.y
     y_b.onclick = () => updateUI(target.question?.y?.goto, `Yes clicked, Move to ${target.question?.y?.goto}`);
+    t1_y_b.onclick = () => updateUI(target.question?.y?.goto, `Yes clicked, Move to ${target.question?.y?.goto}`);
     const y_html = target.question?.y?.contents?.reduce((prev, curr) =>
         prev + `<li>${curr}</li>`
     , '')
     ys_e.innerHTML = y_html;
+    t1_ys_e.innerHTML = y_html;
 
     // target.question.n
+    t1_n_b.onclick = () => updateUI(target.question?.n?.goto, `No clicked, Move to ${target.question?.n?.goto}`);
     n_b.onclick = () => updateUI(target.question?.n?.goto, `No clicked, Move to ${target.question?.n?.goto}`);
     const n_html = target.question?.n?.contents?.reduce((prev, curr) =>
         prev + `<li>${curr}</li>`
     , '')
     ns_e.innerHTML = n_html;
+    t1_ns_e.innerHTML = n_html;
 
     switch (idx) {
         case 1:
@@ -456,7 +499,7 @@ function question_box(q, y, n) {
                     </div>
                 </div>
                 <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
-                    <div onclick="updateUI(${y}, 'Yes clicked, Move to ${y}');" id="yes-btn" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); height: 50%; display: flex; align-items: center; justify-content: center;
+                    <div onclick="updateUI(${y}, 'Yes clicked, Move to ${y}');" id="t3-yes-btn" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); height: 50%; display: flex; align-items: center; justify-content: center;
                     position:relative; cursor: pointer; flex: .4">
                         <div style="font-size: 1.5rem; font-weight: bold;">Yes</div>
                         <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
@@ -464,7 +507,7 @@ function question_box(q, y, n) {
                             </ul>
                         </div>
                     </div>
-                    <div onclick="updateUI(${n}, 'No clicked, Move to ${n}');" id="no-btn" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); height: 50%; display: flex; align-items: center; justify-content: center;
+                    <div onclick="updateUI(${n}, 'No clicked, Move to ${n}');" id="t3-no-btn" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); height: 50%; display: flex; align-items: center; justify-content: center;
                     position:relative; cursor: pointer; flex: .4">
                         <div style="font-size: 1.5rem; font-weight: bold;">No</div>
                         <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
