@@ -395,9 +395,9 @@ function updateUI(idx, msg, isBack = false) {
     }
 
     if (target.cpr === true) {
-        document.getElementById("cpr-timer").setAttribute("value", lastTime.getTime() + 1000 * 60 * 3);
-        document.getElementById("cpr-timer-type3").setAttribute("value", lastTime.getTime() + 1000 * 60 * 3);
-        document.getElementById("cpr-timer-type1").setAttribute("value", lastTime.getTime() + 1000 * 60 * 3);
+        document.getElementById("cpr-timer").setAttribute("value", lastTime.getTime() + 1000 * 60 * 2);
+        document.getElementById("cpr-timer-type3").setAttribute("value", lastTime.getTime() + 1000 * 60 * 2);
+        document.getElementById("cpr-timer-type1").setAttribute("value", lastTime.getTime() + 1000 * 60 * 2);
     }
     // target.question
     target.question?.title ? qt_e.innerHTML = target.question?.title : null;
