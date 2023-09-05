@@ -197,33 +197,9 @@ html, body {
     display: inline-block;
 }
 
-/* .a1 {
-    background-color: red;
+.a1, .a2, .a5, .a7, .a9, .a11, .a12{
+    cursor: pointer;
 }
-
-.a2 {
-    background-color: orange;
-}
-
-.a5 {
-    background-color: yellow;
-}
-
-.a7 {
-    background-color: green;
-}
-
-.a9 {
-    background-color: blue;
-}
-
-.a11 {
-    background-color: navy;
-}
-
-.a12 {
-    background-color: purple;
-} */
 
 .a1.selected, .a2.selected, .a5.selected, .a7.selected, .a9.selected, .a11.selected, .a12.selected{
     background-color: green;
