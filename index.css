@@ -202,5 +202,5 @@ html, body {
 }
 
 .a1.selected, .a2.selected, .a5.selected, .a7.selected, .a9.selected, .a11.selected, .a12.selected{
-    background-color: green;
+    background-color: rgba(100, 255, 100, 0.5);
 }

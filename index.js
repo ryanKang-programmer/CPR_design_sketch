@@ -282,6 +282,20 @@ window.onload = () => {
                     obj.parentNode.parentNode.classList.remove('green');
                     obj.parentNode.parentNode.classList.remove('red');
                 }
+            } else if (obj.id === "epi-timer-from-type1") {
+                if (time - now <= 0){
+                    const toVal = document.getElementById("epi-timer-to-type1").getAttribute("value");
+                    if (toVal - now < 1000 * 10) {
+                        obj.parentNode.parentNode.classList.remove('green');
+                        obj.parentNode.parentNode.classList.add('red');
+                    } else if (toVal - now < 1000 * 60 * 2) {
+                        obj.parentNode.parentNode.classList.add('green');
+                        obj.parentNode.parentNode.classList.remove('red');
+                    }
+                } else {
+                    obj.parentNode.parentNode.classList.remove('green');
+                    obj.parentNode.parentNode.classList.remove('red');
+                }
             }
 
             obj.innerHTML = toHoursAndMinutes((time - now) / 1000);
@@ -391,6 +405,11 @@ function updateUI(idx, msg, isBack = false) {
         if (document.getElementById("epi-timer-from-type3").getAttribute("value") === "" && document.getElementById("epi-timer-to-type3").getAttribute("value") === "") {
             document.getElementById("epi-timer-from-type3").setAttribute("value", lastTime.getTime() + 1000 * 60 * 3);
             document.getElementById("epi-timer-to-type3").setAttribute("value", lastTime.getTime() + 1000 * 60 * 5);
+        }
+
+        if (document.getElementById("epi-timer-from-type1").getAttribute("value") === "" && document.getElementById("epi-timer-to-type1").getAttribute("value") === "") {
+            document.getElementById("epi-timer-from-type1").setAttribute("value", lastTime.getTime() + 1000 * 60 * 3);
+            document.getElementById("epi-timer-to-type1").setAttribute("value", lastTime.getTime() + 1000 * 60 * 5);
         }
     }
 
@@ -650,6 +669,11 @@ function refreshEpi() {
     if (document.getElementById("epi-timer-from-type3").getAttribute("value") !== "" && document.getElementById("epi-timer-to-type3").getAttribute("value") !== "") {
         document.getElementById("epi-timer-from-type3").setAttribute("value", lastTime.getTime() + 1000 * 60 * 3);
         document.getElementById("epi-timer-to-type3").setAttribute("value", lastTime.getTime() + 1000 * 60 * 5);
+    }
+
+    if (document.getElementById("epi-timer-from-type1").getAttribute("value") !== "" && document.getElementById("epi-timer-to-type1").getAttribute("value") !== "") {
+        document.getElementById("epi-timer-from-type1").setAttribute("value", lastTime.getTime() + 1000 * 60 * 3);
+        document.getElementById("epi-timer-to-type1").setAttribute("value", lastTime.getTime() + 1000 * 60 * 5);
     }
 }
 

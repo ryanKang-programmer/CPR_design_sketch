@@ -34,9 +34,9 @@
                                     Epinephrine
                                 </div>
                             </div>
-                            <div id="epi-timer-from" class="time" value=""></div>
+                            <div id="epi-timer-from-type1" class="time" value=""></div>
                             <div>-</div>
-                            <div id="epi-timer-to" class="time" value=""></div>
+                            <div id="epi-timer-to-type1" class="time" value=""></div>
                         </div>
                     </div>
                 </div>
@@ -316,29 +316,31 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="hex4 a1 algo" style="flex: 0; padding: 2rem;">
-                            <div style="height: 3vh; width: 20vw;">
-                                <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
-                                    <div style="position: absolute;top: -1.7rem; height: 3rem; display: flex; align-items: center; justify-content: center;">
-                                        <div style="font-size: 1rem; font-weight: bold;">
-                                            Rythm shockable?
-                                        </div>
-                                    </div>
-                                    <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
-                                        <div onclick="updateUI(2, 'Yes clicked, Move to 2');" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
-                                        position:relative; cursor: pointer; flex: .4">
-                                            <div style="font-size: 1rem; font-weight: bold;">Yes</div>
-                                            <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
-                                                <ul id="yes-summary" style="list-style-position: inside;">
-                                                </ul>
+                        <div class="a1 algo">
+                            <div class="hex4" style="flex: 0; padding: 2rem;">
+                                <div style="height: 3vh; width: 20vw;">
+                                    <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
+                                        <div style="position: absolute;top: -1.7rem; height: 3rem; display: flex; align-items: center; justify-content: center;">
+                                            <div style="font-size: 1rem; font-weight: bold;">
+                                                Rythm shockable?
                                             </div>
                                         </div>
-                                        <div onclick="updateUI(9, 'No clicked, Move to 9');" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
-                                        position:relative; cursor: pointer; flex: .4">
-                                            <div style="font-size: 1rem; font-weight: bold;">No</div>
-                                            <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
-                                                <ul id="no-summary" style="list-style-position: inside;">
-                                                </ul>
+                                        <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
+                                            <div onclick="updateUI(2, 'Yes clicked, Move to 2');" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
+                                            position:relative; cursor: pointer; flex: .4">
+                                                <div style="font-size: 1rem; font-weight: bold;">Yes</div>
+                                                <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                                                    <ul id="yes-summary" style="list-style-position: inside;">
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div onclick="updateUI(9, 'No clicked, Move to 9');" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
+                                            position:relative; cursor: pointer; flex: .4">
+                                                <div style="font-size: 1rem; font-weight: bold;">No</div>
+                                                <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                                                    <ul id="no-summary" style="list-style-position: inside;">
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -374,29 +376,31 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="hex4 a2 algo" style="flex: 0; padding: 2rem;">
-                                    <div style="height: 3vh; width: 20vw;">
-                                        <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
-                                            <div style="position: absolute;top: -1.7rem; height: 3rem; display: flex; align-items: center; justify-content: center;">
-                                                <div style="font-size: 1rem; font-weight: bold;">
-                                                    Rythm shockable?
-                                                </div>
-                                            </div>
-                                            <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
-                                                <div onclick="updateUI(5, 'Yes clicked, Move to 5');" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
-                                                position:relative; cursor: pointer; flex: .4">
-                                                    <div style="font-size: 1rem; font-weight: bold;">Yes</div>
-                                                    <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
-                                                        <ul id="yes-summary" style="list-style-position: inside;">
-                                                        </ul>
+                                <div class="a2 algo">
+                                    <div class="hex4" style="flex: 0; padding: 2rem;">
+                                        <div style="height: 3vh; width: 20vw;">
+                                            <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
+                                                <div style="position: absolute;top: -1.7rem; height: 3rem; display: flex; align-items: center; justify-content: center;">
+                                                    <div style="font-size: 1rem; font-weight: bold;">
+                                                        Rythm shockable?
                                                     </div>
                                                 </div>
-                                                <div onclick="updateUI(12, 'No clicked, Move to 12');" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
-                                                position:relative; cursor: pointer; flex: .4">
-                                                    <div style="font-size: 1rem; font-weight: bold;">No</div>
-                                                    <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
-                                                        <ul id="no-summary" style="list-style-position: inside;">
-                                                        </ul>
+                                                <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
+                                                    <div onclick="updateUI(5, 'Yes clicked, Move to 5');" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
+                                                    position:relative; cursor: pointer; flex: .4">
+                                                        <div style="font-size: 1rem; font-weight: bold;">Yes</div>
+                                                        <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                                                            <ul id="yes-summary" style="list-style-position: inside;">
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div onclick="updateUI(12, 'No clicked, Move to 12');" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
+                                                    position:relative; cursor: pointer; flex: .4">
+                                                        <div style="font-size: 1rem; font-weight: bold;">No</div>
+                                                        <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                                                            <ul id="no-summary" style="list-style-position: inside;">
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -426,29 +430,31 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="hex4 a5 algo" style="flex: 0; padding: 2rem;">
-                                    <div style="height: 3vh; width: 20vw;">
-                                        <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
-                                            <div style="position: absolute;top: -1.7rem; height: 3rem; display: flex; align-items: center; justify-content: center;">
-                                                <div style="font-size: 1rem; font-weight: bold;">
-                                                    Rythm shockable?
-                                                </div>
-                                            </div>
-                                            <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
-                                                <div onclick="updateUI(7, 'Yes clicked, Move to 7');" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
-                                                position:relative; cursor: pointer; flex: .4">
-                                                    <div style="font-size: 1rem; font-weight: bold;">Yes</div>
-                                                    <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
-                                                        <ul id="yes-summary" style="list-style-position: inside;">
-                                                        </ul>
+                                <div class="a5 algo">
+                                    <div class="hex4" style="flex: 0; padding: 2rem;">
+                                        <div style="height: 3vh; width: 20vw;">
+                                            <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
+                                                <div style="position: absolute;top: -1.7rem; height: 3rem; display: flex; align-items: center; justify-content: center;">
+                                                    <div style="font-size: 1rem; font-weight: bold;">
+                                                        Rythm shockable?
                                                     </div>
                                                 </div>
-                                                <div onclick="updateUI(12, 'No clicked, Move to 12');" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
-                                                position:relative; cursor: pointer; flex: .4">
-                                                    <div style="font-size: 1rem; font-weight: bold;">No</div>
-                                                    <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
-                                                        <ul id="no-summary" style="list-style-position: inside;">
-                                                        </ul>
+                                                <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
+                                                    <div onclick="updateUI(7, 'Yes clicked, Move to 7');" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
+                                                    position:relative; cursor: pointer; flex: .4">
+                                                        <div style="font-size: 1rem; font-weight: bold;">Yes</div>
+                                                        <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                                                            <ul id="yes-summary" style="list-style-position: inside;">
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div onclick="updateUI(12, 'No clicked, Move to 12');" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
+                                                    position:relative; cursor: pointer; flex: .4">
+                                                        <div style="font-size: 1rem; font-weight: bold;">No</div>
+                                                        <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                                                            <ul id="no-summary" style="list-style-position: inside;">
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -509,29 +515,31 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="hex4 a9 algo" style="flex: 0; padding: 2rem;">
-                                    <div style="height: 3vh; width: 20vw;">
-                                        <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
-                                            <div style="position: absolute;top: -1.7rem; height: 3rem; display: flex; align-items: center; justify-content: center;">
-                                                <div style="font-size: 1rem; font-weight: bold;">
-                                                    Rythm shockable?
-                                                </div>
-                                            </div>
-                                            <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
-                                                <div onclick="updateUI(7, 'Yes clicked, Move to 7');" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
-                                                position:relative; cursor: pointer; flex: .4">
-                                                    <div style="font-size: 1rem; font-weight: bold;">Yes</div>
-                                                    <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
-                                                        <ul id="yes-summary" style="list-style-position: inside;">
-                                                        </ul>
+                                <div class="a9 algo">
+                                    <div class="hex4" style="flex: 0; padding: 2rem;">
+                                        <div style="height: 3vh; width: 20vw;">
+                                            <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
+                                                <div style="position: absolute;top: -1.7rem; height: 3rem; display: flex; align-items: center; justify-content: center;">
+                                                    <div style="font-size: 1rem; font-weight: bold;">
+                                                        Rythm shockable?
                                                     </div>
                                                 </div>
-                                                <div onclick="updateUI(11, 'No clicked, Move to 11');" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
-                                                position:relative; cursor: pointer; flex: .4">
-                                                    <div style="font-size: 1rem; font-weight: bold;">No</div>
-                                                    <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
-                                                        <ul id="no-summary" style="list-style-position: inside;">
-                                                        </ul>
+                                                <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
+                                                    <div onclick="updateUI(7, 'Yes clicked, Move to 7');" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
+                                                    position:relative; cursor: pointer; flex: .4">
+                                                        <div style="font-size: 1rem; font-weight: bold;">Yes</div>
+                                                        <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                                                            <ul id="yes-summary" style="list-style-position: inside;">
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div onclick="updateUI(11, 'No clicked, Move to 11');" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
+                                                    position:relative; cursor: pointer; flex: .4">
+                                                        <div style="font-size: 1rem; font-weight: bold;">No</div>
+                                                        <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                                                            <ul id="no-summary" style="list-style-position: inside;">
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -554,29 +562,31 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="hex4 a11 algo" style="flex: 0; padding: 2rem;">
-                                    <div style="height: 3vh; width: 20vw;">
-                                        <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
-                                            <div style="position: absolute;top: -1.7rem; height: 3rem; display: flex; align-items: center; justify-content: center;">
-                                                <div style="font-size: 1rem; font-weight: bold;">
-                                                    Rythm shockable?
-                                                </div>
-                                            </div>
-                                            <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
-                                                <div onclick="updateUI(7, 'Yes clicked, Move to 7');" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
-                                                position:relative; cursor: pointer; flex: .4">
-                                                    <div style="font-size: 1rem; font-weight: bold;">Yes</div>
-                                                    <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
-                                                        <ul id="yes-summary" style="list-style-position: inside;">
-                                                        </ul>
+                                <div class="a11 algo">
+                                    <div class="hex4" style="flex: 0; padding: 2rem;">
+                                        <div style="height: 3vh; width: 20vw;">
+                                            <div style="display: flex; justify-content: center; align-items: center; position: relative; height: 100%; width: 100%;">
+                                                <div style="position: absolute;top: -1.7rem; height: 3rem; display: flex; align-items: center; justify-content: center;">
+                                                    <div style="font-size: 1rem; font-weight: bold;">
+                                                        Rythm shockable?
                                                     </div>
                                                 </div>
-                                                <div onclick="updateUI(12, 'No clicked, Move to 12');" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
-                                                position:relative; cursor: pointer; flex: .4">
-                                                    <div style="font-size: 1rem; font-weight: bold;">No</div>
-                                                    <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
-                                                        <ul id="no-summary" style="list-style-position: inside;">
-                                                        </ul>
+                                                <div style="position: absolute; inset: 2rem; display: flex; justify-content: space-around; align-items: center;">
+                                                    <div onclick="updateUI(7, 'Yes clicked, Move to 7');" style="border-radius: 10px; background-color: rgba(0, 176, 80, 0.5); display: flex; align-items: center; justify-content: center;
+                                                    position:relative; cursor: pointer; flex: .4">
+                                                        <div style="font-size: 1rem; font-weight: bold;">Yes</div>
+                                                        <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                                                            <ul id="yes-summary" style="list-style-position: inside;">
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div onclick="updateUI(12, 'No clicked, Move to 12');" style="border-radius: 10px; background-color: rgba(127, 127, 127, 0.5); display: flex; align-items: center; justify-content: center;
+                                                    position:relative; cursor: pointer; flex: .4">
+                                                        <div style="font-size: 1rem; font-weight: bold;">No</div>
+                                                        <div style="position: absolute; top: 2rem; font-size: 1rem; padding: .5rem;">
+                                                            <ul id="no-summary" style="list-style-position: inside;">
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
